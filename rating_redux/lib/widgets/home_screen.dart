@@ -25,18 +25,15 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return ActiveTab(builder: (BuildContext context, AppTab activeTab) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('RatingReduxDemoApp'),
-          actions: [
-            FilterSelector(visible: activeTab == AppTab.speakers),
-          ],
-        ),
-        body: activeTab == AppTab.speakers ? FilteredSpeakers() : Talks(),
-        bottomNavigationBar: TabSelector(),
-      );
-    });
-  }
+  Widget build(BuildContext context) => ActiveTab(
+      builder: (BuildContext context, AppTab activeTab) => Scaffold(
+            appBar: AppBar(
+              title: Text('RatingReduxDemoApp'),
+              actions: [
+                FilterSelector(visible: activeTab == AppTab.speakers),
+              ],
+            ),
+            body: activeTab == AppTab.speakers ? FilteredSpeakers() : Talks(),
+            bottomNavigationBar: TabSelector(),
+          ));
 }

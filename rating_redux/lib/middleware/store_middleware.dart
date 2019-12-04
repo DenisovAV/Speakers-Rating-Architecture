@@ -15,10 +15,8 @@ List<Middleware<AppState>> createStoreMiddleware(
   return [
     TypedMiddleware<AppState, LoadSpeakersAction>(loadSpeakers),
     TypedMiddleware<AppState, UpdateSpeakerAction>(saveSpeakers),
-    TypedMiddleware<AppState, SpeakersLoadedAction>(saveSpeakers),
     TypedMiddleware<AppState, LoadTalksAction>(loadTalks),
     TypedMiddleware<AppState, UpdateSpeakerAction>(saveTalks),
-    TypedMiddleware<AppState, TalksLoadedAction>(saveTalks),
   ];
 }
 

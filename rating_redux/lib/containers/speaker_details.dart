@@ -1,4 +1,3 @@
-
 import 'package:rating_redux/actions/actions.dart';
 import 'package:rating_redux/models/app_state.dart';
 import 'package:rating_redux/models/speaker.dart';
@@ -13,20 +12,18 @@ class SpeakerDetails extends StatelessWidget {
   SpeakerDetails({Key key, @required this.id}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return StoreConnector<AppState, _ViewModel>(
-      ignoreChange: (state) => !state.speakers.any((s) => s.id == id),
-      converter: (Store<AppState> store) {
-        return _ViewModel.from(store, id);
-      },
-      builder: (context, vm) {
-        return DetailsScreen(
-          speaker: vm.speaker,
-          ratingChanged: vm.ratingChanged,
-        );
-      },
-    );
-  }
+  Widget build(BuildContext context) => StoreConnector<AppState, _ViewModel>(
+        ignoreChange: (state) => !state.speakers.any((s) => s.id == id),
+        converter: (Store<AppState> store) {
+          return _ViewModel.from(store, id);
+        },
+        builder: (context, vm) {
+          return DetailsScreen(
+            speaker: vm.speaker,
+            ratingChanged: vm.ratingChanged,
+          );
+        },
+      );
 }
 
 class _ViewModel {
@@ -39,7 +36,7 @@ class _ViewModel {
   });
 
   factory _ViewModel.from(Store<AppState> store, int id) {
-    final speaker = store.state.speakers.firstWhere((s)=> s.id == id);
+    final speaker = store.state.speakers.firstWhere((s) => s.id == id);
 
     return _ViewModel(
       speaker: speaker,

@@ -5,7 +5,7 @@ import 'package:rating_bloc/models/app_state.dart';
 import 'package:rating_bloc/repository/speakers_repository.dart';
 import 'package:rating_bloc/repository/talks_repository.dart';
 
-class AppBloc {
+class SpeakersBloc {
   final SpeakersRepository _speakersRepository;
   final TalksRepository _talksRepository;
 
@@ -17,7 +17,7 @@ class AppBloc {
   Stream<AppState> get state => _stateController.stream;
   Sink<Action> get action => _actionsController.sink;
 
-  AppBloc(this._speakersRepository, this._talksRepository) {
+  SpeakersBloc(this._speakersRepository, this._talksRepository) {
     _actionsController.stream.listen(handleAction);
   }
 

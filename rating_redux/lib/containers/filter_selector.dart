@@ -1,4 +1,3 @@
-
 import 'package:rating_redux/actions/actions.dart';
 import 'package:rating_redux/models/app_state.dart';
 import 'package:rating_redux/models/filter.dart';
@@ -13,19 +12,17 @@ class FilterSelector extends StatelessWidget {
   FilterSelector({Key key, @required this.visible}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return StoreConnector<AppState, _ViewModel>(
-      distinct: true,
-      converter: _ViewModel.fromStore,
-      builder: (context, vm) {
-        return FilterButton(
-          visible: visible,
-          activeFilter: vm.activeFilter,
-          onSelected: vm.onFilterSelected,
-        );
-      },
-    );
-  }
+  Widget build(BuildContext context) => StoreConnector<AppState, _ViewModel>(
+        distinct: true,
+        converter: _ViewModel.fromStore,
+        builder: (context, vm) {
+          return FilterButton(
+            visible: visible,
+            activeFilter: vm.activeFilter,
+            onSelected: vm.onFilterSelected,
+          );
+        },
+      );
 }
 
 class _ViewModel {
@@ -49,9 +46,7 @@ class _ViewModel {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is _ViewModel &&
-          runtimeType == other.runtimeType &&
-          activeFilter == other.activeFilter;
+      other is _ViewModel && runtimeType == other.runtimeType && activeFilter == other.activeFilter;
 
   @override
   int get hashCode => activeFilter.hashCode;

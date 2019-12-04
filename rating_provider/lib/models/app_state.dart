@@ -3,7 +3,6 @@ import 'package:rating_provider/models/filter.dart';
 import 'package:rating_provider/models/speaker.dart';
 import 'package:rating_provider/models/talk.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 class AppState with ChangeNotifier {
   final List<Speaker> speakers;

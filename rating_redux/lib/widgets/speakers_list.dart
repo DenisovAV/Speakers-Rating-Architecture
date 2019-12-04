@@ -14,26 +14,19 @@ class SpeakerList extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return AppLoading(builder: (context, loading) {
-      print(loading);
-      return loading ? LoadingIndicator() : _buildListView();
-    });
-  }
+  Widget build(BuildContext context) =>
+      AppLoading(builder: (context, loading) => loading ? LoadingIndicator() : _buildListView());
 
-  ListView _buildListView() {
-    return ListView.builder(
-      itemCount: speakers.length,
-      itemBuilder: (BuildContext context, int index) {
-        final speaker = speakers[index];
-
-        return SpeakerItem(
-          speaker: speaker,
-          onTap: () => _onSpeakerTap(context, speaker),
-        );
-      },
-    );
-  }
+  ListView _buildListView() => ListView.builder(
+        itemCount: speakers.length,
+        itemBuilder: (BuildContext context, int index) {
+          final speaker = speakers[index];
+          return SpeakerItem(
+            speaker: speaker,
+            onTap: () => _onSpeakerTap(context, speaker),
+          );
+        },
+      );
 
   void _onSpeakerTap(BuildContext context, Speaker speaker) {
     Navigator.of(context).push(MaterialPageRoute(

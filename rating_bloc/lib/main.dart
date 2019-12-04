@@ -1,4 +1,4 @@
-import 'package:rating_bloc/blocs/app_bloc.dart';
+import 'package:rating_bloc/blocs/speakers_bloc.dart';
 import 'package:rating_bloc/widgets/home_screen.dart';
 import 'package:rating_bloc/repository/speakers_repository.dart';
 import 'package:rating_bloc/repository/talks_repository.dart';
@@ -11,7 +11,7 @@ class RatingBlocApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Mobius Speakers',
-      home: HomeScreen(() => AppBloc(ConstSpeakersRepository(), ConstTalksRepository())),
+      home: HomeScreen(() => SpeakersBloc(ConstSpeakersRepository(), ConstTalksRepository())),
     );
   }
 }

@@ -12,37 +12,36 @@ class SpeakerItem extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onTap,
-      leading: CircleAvatar(
-        backgroundImage: AssetImage(speaker.assetName),
-      ),
-      trailing: _getIconWidget(speaker.rating),
-      title: Hero(
-        tag: '_tag${speaker.id}_',
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: Text(
-            speaker.name,
-            style: Theme.of(context).textTheme.title,
+  Widget build(BuildContext context) => ListTile(
+        onTap: onTap,
+        leading: CircleAvatar(
+          backgroundImage: AssetImage(speaker.assetName),
+        ),
+        trailing: _getIconWidget(speaker.rating),
+        title: Hero(
+          tag: '_tag${speaker.id}_',
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Text(
+              speaker.name,
+              style: Theme.of(context).textTheme.title,
+            ),
           ),
         ),
-      ),
-      subtitle: Text(
-        speaker.topic,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        style: Theme.of(context).textTheme.subhead,
-      ),
-    );
-  }
+        subtitle: Text(
+          speaker.topic,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.subhead,
+        ),
+      );
 
-  Widget _getIconWidget(int rating) {
-    return (rating != null)
-        ? IconButton(icon: Utils.getRatingIcon(rating), onPressed: (){},)
-        : Container(
-            width: 0,
-          );
-  }
+  Widget _getIconWidget(int rating) => (rating != null)
+      ? IconButton(
+          icon: Utils.getRatingIcon(rating),
+          onPressed: () {},
+        )
+      : Container(
+          width: 0,
+        );
 }

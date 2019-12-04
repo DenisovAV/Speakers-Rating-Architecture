@@ -15,7 +15,7 @@ class ConstSpeakersRepository extends SpeakersRepository {
     Speaker(0, 'Йонатан Левин', topic: 'Неизвестно', rating: 4),
     Speaker(1, 'Марина Плешкова',
         topic: 'Лайфхаки в работе с техподдержкой Google Play Store и App Store Connect',
-        rating: 2),
+        rating: 5),
     Speaker(2, 'Александр Денисов', topic: 'Flutter State Management Wars. BLoC vs Redux'),
     Speaker(4, 'Барух Садогурский',
         topic: 'Как правильно продать себя ради фана и профита', rating: 3),

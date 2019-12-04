@@ -35,7 +35,7 @@ class _ViewModel {
     return _ViewModel(
       speakers: store.state.speakers.where((s) {
         if (store.state.filter == Filter.top) {
-          return s.rating == 4;
+          return s.rating == 5;
         } else if (store.state.filter == Filter.unrated) {
           return s.rating == null;
         } else {

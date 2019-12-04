@@ -34,12 +34,10 @@ class _ViewModel {
     @required this.onCheckboxChanged
   });
 
-  static _ViewModel fromStore(Store<AppState> store) {
-    return _ViewModel(
+  static _ViewModel fromStore(Store<AppState> store) => _ViewModel(
       talks: store.state.talks,
       loading: store.state.isLoading,
       onCheckboxChanged: (talk) {
-        print(talk);
         store.dispatch(UpdateTalkAction(
           talk.id,
           talk.copyWith(isFavourite: !talk.isFavourite),
@@ -48,4 +46,4 @@ class _ViewModel {
 
     );
   }
-}
+

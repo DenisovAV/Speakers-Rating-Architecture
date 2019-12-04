@@ -44,7 +44,7 @@ class DetailsScreen extends StatelessWidget {
                       allowHalfRating: true,
                       itemCount: 5,
                       itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, index) => Utils.getRatingIcon(index+1),
+                      itemBuilder: (context, index) => Utils.getRatingIcon(index + 1),
                       onRatingUpdate: (rating) => ratingChanged(rating.toInt())),
                 ])));
   }

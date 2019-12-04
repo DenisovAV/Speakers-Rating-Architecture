@@ -1,5 +1,5 @@
 import 'package:rating_bloc/actions/actions.dart';
-import 'package:rating_bloc/blocs/app_bloc.dart';
+import 'package:rating_bloc/blocs/speakers_bloc.dart';
 import 'package:rating_bloc/models/app_state.dart';
 import 'package:rating_bloc/models/app_tab.dart';
 import 'package:rating_bloc/models/filter.dart';
@@ -22,8 +22,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-
-  AppBloc _bloc;
+  SpeakersBloc _bloc;
 
   @override
   void initState() {
@@ -34,51 +33,49 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<AppState>(
-        stream: _bloc.state,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return LoadingIndicator();
-          } else {
-            return Scaffold(
-              appBar: AppBar(
-                title: Text('RatingBlocDemoApp'),
-                actions: [
-                  FilterButton(
-                    visible: snapshot.data.activeTab == AppTab.speakers,
-                    activeFilter: snapshot.data.filter,
-                    onSelected: (filter) => _bloc.action.add(UpdateFilterAction(filter)),
+  Widget build(BuildContext context) => StreamBuilder<AppState>(
+      stream: _bloc.state,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return LoadingIndicator();
+        } else {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('RatingBlocDemoApp'),
+              actions: [
+                FilterButton(
+                  visible: snapshot.data.activeTab == AppTab.speakers,
+                  activeFilter: snapshot.data.filter,
+                  onSelected: (filter) => _bloc.action.add(UpdateFilterAction(filter)),
+                ),
+              ],
+            ),
+            body: snapshot.data.activeTab == AppTab.speakers
+                ? SpeakerList(
+                    speakers: _filteredSpeakers(snapshot.data.speakers, snapshot.data.filter),
+                    ratingChanged: (speaker, rating) =>
+                        _bloc.action.add(UpdateSpeakerAction(speaker.copyWith(rating: rating))),
+                  )
+                : TalksList(
+                    talks: snapshot.data.talks,
+                    onTalkTapped: (talk) => _bloc.action
+                        .add(UpdateTalkAction(talk.copyWith(isFavourite: !talk.isFavourite))),
                   ),
-                ],
-              ),
-              body: snapshot.data.activeTab == AppTab.speakers
-                  ? SpeakerList(
-                      speakers: _filteredSpeakers(snapshot.data.speakers, snapshot.data.filter),
-                      ratingChanged: (speaker, rating) => _bloc.action
-                          .add(UpdateSpeakerAction(speaker.copyWith(rating: rating))),
-                    )
-                  : TalksList(
-                      talks: snapshot.data.talks,
-                      onTalkTapped: (talk) => _bloc.action
-                          .add(UpdateTalkAction(talk.copyWith(isFavourite: !talk.isFavourite))),
-                    ),
-              bottomNavigationBar: BottomNavigationBar(
-                currentIndex: AppTab.values.indexOf(snapshot.data.activeTab),
-                onTap: (index) => _bloc.action.add(UpdateTabAction(AppTab.values[index])),
-                items: AppTab.values.map((tab) {
-                  return BottomNavigationBarItem(
-                    icon: Icon(
-                      tab == AppTab.speakers ? Icons.group : Icons.list,
-                    ),
-                    title: Text(tab == AppTab.speakers ? 'Speakers' : 'Schedule'),
-                  );
-                }).toList(),
-              ),
-            );
-          }
-        });
-  }
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: AppTab.values.indexOf(snapshot.data.activeTab),
+              onTap: (index) => _bloc.action.add(UpdateTabAction(AppTab.values[index])),
+              items: AppTab.values.map((tab) {
+                return BottomNavigationBarItem(
+                  icon: Icon(
+                    tab == AppTab.speakers ? Icons.group : Icons.list,
+                  ),
+                  title: Text(tab == AppTab.speakers ? 'Speakers' : 'Schedule'),
+                );
+              }).toList(),
+            ),
+          );
+        }
+      });
 
   List<Speaker> _filteredSpeakers(List<Speaker> speakers, Filter filter) => speakers.where((s) {
         if (filter == Filter.top) {
@@ -95,5 +92,4 @@ class HomeScreenState extends State<HomeScreen> {
     _bloc?.dispose();
     super.dispose();
   }
-
 }
