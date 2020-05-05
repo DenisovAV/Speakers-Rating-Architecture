@@ -5,7 +5,7 @@ import 'package:rating_bloc/models/state/speakers_state.dart';
 import 'package:rating_bloc/repository/speakers_repository.dart';
 
 class SpeakersBloc {
-  final ConstSpeakersRepository _speakersRepository;
+  final SpeakersRepository _speakersRepository;
 
   var _currentState = SpeakersState();
 

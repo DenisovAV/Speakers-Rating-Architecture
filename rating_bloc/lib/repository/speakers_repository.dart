@@ -2,7 +2,7 @@ import 'package:rating_bloc/models/speaker.dart';
 
 abstract class SpeakersRepository {
 
-  const SpeakersRepository();
+  SpeakersRepository();
 
   Future<List<Speaker>> getSpeakers();
 
@@ -12,7 +12,7 @@ abstract class SpeakersRepository {
 }
 
 class ConstSpeakersRepository extends SpeakersRepository{
-  const ConstSpeakersRepository();
+  ConstSpeakersRepository();
 
   static const _allSpeakers = <Speaker>[
     Speaker(0, 'Йонатан Левин', topic: 'Неизвестно', rating: 4),

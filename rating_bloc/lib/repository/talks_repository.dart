@@ -4,7 +4,7 @@ import 'dart:async';
 
 abstract class TalksRepository {
 
-  const TalksRepository();
+  TalksRepository();
 
   Future<List<ScheduledTalk>> getTalks();
 
@@ -17,9 +17,9 @@ abstract class TalksRepository {
 
 class ConstTalksRepository extends TalksRepository{
   final ConstSpeakersRepository _speakersRepository;
-  final _allTalks = const <ScheduledTalk>[];
+  final _allTalks = <ScheduledTalk>[];
 
-  const ConstTalksRepository(this._speakersRepository);
+  ConstTalksRepository(this._speakersRepository);
 
   Future<List<ScheduledTalk>> _initializeTalks() async {
     _allTalks.addAll([

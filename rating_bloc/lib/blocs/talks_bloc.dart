@@ -5,7 +5,7 @@ import 'package:rating_bloc/models/state/talks_state.dart';
 import 'package:rating_bloc/repository/talks_repository.dart';
 
 class TalksBloc {
-  final ConstTalksRepository _talksRepository;
+  final TalksRepository _talksRepository;
 
   var _currentState = TalksState();
 
