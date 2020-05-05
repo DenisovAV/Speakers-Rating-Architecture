@@ -1,10 +1,9 @@
-import 'package:meta/meta.dart';
+import 'package:rating_bloc/models/speaker.dart';
 
-@immutable
 class ScheduledTalk {
   final int id;
   final String time;
-  final String speaker;
+  final Speaker speaker;
   final String topic;
   final bool isFavourite;
 
@@ -18,24 +17,18 @@ class ScheduledTalk {
         isFavourite: isFavourite ?? this.isFavourite);
   }
 
-
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is ScheduledTalk &&
-              runtimeType == other.runtimeType &&
-              id == other.id &&
-              time == other.time &&
-              speaker == other.speaker &&
-              topic == other.topic;
+      other is ScheduledTalk &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          time == other.time &&
+          speaker == other.speaker &&
+          topic == other.topic;
 
   @override
-  int get hashCode =>
-      id.hashCode ^
-      time.hashCode ^
-      speaker.hashCode ^
-      topic.hashCode;
-
+  int get hashCode => id.hashCode ^ time.hashCode ^ speaker.hashCode ^ topic.hashCode;
 
   @override
   String toString() {

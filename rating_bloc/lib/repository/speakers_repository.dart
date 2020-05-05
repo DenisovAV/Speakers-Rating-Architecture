@@ -1,14 +1,17 @@
 import 'package:rating_bloc/models/speaker.dart';
 
 abstract class SpeakersRepository {
+
   const SpeakersRepository();
 
-  Future<List<Speaker>> loadSpeakers();
+  Future<List<Speaker>> getSpeakers();
 
-  Future saveSpeaker(Speaker speaker);
+  Future<Speaker> getSpeakerById({int id});
+
+  void saveSpeaker(Speaker speaker);
 }
 
-class ConstSpeakersRepository extends SpeakersRepository {
+class ConstSpeakersRepository extends SpeakersRepository{
   const ConstSpeakersRepository();
 
   static const _allSpeakers = <Speaker>[
@@ -27,12 +30,17 @@ class ConstSpeakersRepository extends SpeakersRepository {
   ];
 
   @override
-  Future<List<Speaker>> loadSpeakers() async {
+  Future<List<Speaker>> getSpeakers() async {
     return _allSpeakers;
   }
 
   @override
-  Future saveSpeaker(Speaker speaker) {
+  Future<Speaker> getSpeakerById({int id}) async {
+    return _allSpeakers.firstWhere((speaker) => speaker.id == id);
+  }
+
+  @override
+  void saveSpeaker(Speaker speaker) {
     //Here should be saving item to repository
     return null;
   }

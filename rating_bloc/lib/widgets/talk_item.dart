@@ -18,9 +18,8 @@ class TalkItem extends StatelessWidget {
         style: Theme.of(context).textTheme.body1,
       ),
       trailing: IconButton(
-        icon: Icon(talk.isFavourite ? Icons.check_circle : Icons.check_circle_outline),
-        onPressed: onTalkTapped
-      ),
+          icon: Icon(talk.isFavourite ? Icons.check_circle : Icons.check_circle_outline),
+          onPressed: onTalkTapped),
       title: Hero(
         tag: '_tag${talk.id}_',
         child: Container(
@@ -34,7 +33,7 @@ class TalkItem extends StatelessWidget {
         ),
       ),
       subtitle: Text(
-        talk.speaker,
+        talk.speaker?.name ?? '',
         style: Theme.of(context).textTheme.subhead,
       ),
     );

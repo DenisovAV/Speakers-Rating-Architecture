@@ -1,6 +1,3 @@
-import 'package:meta/meta.dart';
-
-@immutable
 class Speaker {
   final int id;
   final String name;
