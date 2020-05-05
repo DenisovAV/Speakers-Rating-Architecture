@@ -18,15 +18,12 @@ class UiBloc {
   Sink<Action> get action => _actionsController.sink;
 
   UiBloc(this.speakersBloc, this.talksBloc) {
-    print('construktor');
     speakersBloc.state.listen((state) {
       _currentState = _currentState.copyWith(speakersState: state);
-      print('spekaers ${_currentState.speakersState.speakers.length}');
       _stateController.add(_currentState);
     });
     talksBloc.state.listen((state) {
       _currentState = _currentState.copyWith(talksState: state);
-      print('talks ${_currentState.talksState.talks.length}');
       _stateController.add(_currentState);
     });
     _actionsController.stream.listen((action) {
