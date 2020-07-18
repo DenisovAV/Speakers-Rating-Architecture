@@ -5,9 +5,9 @@ import 'package:rating_mobx/repository/speakers_repository.dart';
 import 'package:rating_mobx/repository/talks_repository.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(RatingProviderApp());
+void main() => runApp(RatingMobXApp());
 
-class RatingProviderApp extends StatelessWidget {
+class RatingMobXApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

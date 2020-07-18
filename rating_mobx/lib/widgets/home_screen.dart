@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('RatingProviderDemoApp'),
+        title: Text('RatingMobXDemoApp'),
         actions: [
           Observer(
               builder: (context) => FilterButton(
