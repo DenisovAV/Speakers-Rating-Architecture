@@ -1,0 +1,2 @@
+
+enum AppTab { speakers, talks }

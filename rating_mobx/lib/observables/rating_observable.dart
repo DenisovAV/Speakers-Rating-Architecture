@@ -1,21 +1,35 @@
-import 'package:flutter/material.dart';
-import 'package:rating_provider/models/speaker.dart';
-import 'package:rating_provider/models/talk.dart';
-import 'package:rating_provider/repository/speakers_repository.dart';
-import 'package:rating_provider/repository/talks_repository.dart';
-import 'package:rating_provider/models/filter.dart';
-import 'package:rating_provider/models/app_tab.dart';
+import 'package:mobx/mobx.dart';
+import 'package:rating_mobx/models/speaker.dart';
+import 'package:rating_mobx/models/talk.dart';
+import 'package:rating_mobx/repository/speakers_repository.dart';
+import 'package:rating_mobx/repository/talks_repository.dart';
+import 'package:rating_mobx/models/filter.dart';
+import 'package:rating_mobx/models/app_tab.dart';
 
-class RatingAppState with ChangeNotifier {
+part 'rating_observable.g.dart';
+
+class RatingState = _RatingState with _$RatingState;
+
+abstract class _RatingState with Store {
   final SpeakersRepository _speakersRepository;
   final TalksRepository _talksRepository;
+
+  @observable
   List<ScheduledTalk> talks = [];
+
+  @observable
   List<Speaker> speakers = [];
+
+  @observable
   Filter activeFilter;
+
+  @observable
   int activeTabIndex = AppTab.speakers.index;
 
+  @computed
   bool get isLoaded => talks.isNotEmpty && speakers.isNotEmpty;
 
+  @computed
   List<Speaker> get filteredSpeakers => speakers.where((s) {
         if (activeFilter == Filter.top) {
           return s.rating == 5;
@@ -26,40 +40,38 @@ class RatingAppState with ChangeNotifier {
         }
       }).toList();
 
-  RatingAppState(this._speakersRepository, this._talksRepository) {
+  _RatingState(this._speakersRepository, this._talksRepository) {
     _initSpeakers();
     _initTalks();
   }
 
   void _initSpeakers() async {
     speakers = await _speakersRepository.loadSpeakers();
-    notifyListeners();
   }
 
   void _initTalks() async {
     talks = await _talksRepository.loadTalks();
-    notifyListeners();
   }
 
+  @action
   void updateSpeaker(Speaker speaker) {
     _speakersRepository.saveSpeaker(speaker);
     speakers = speakers.map((s) => s.id == speaker.id ? speaker : s).toList();
-    notifyListeners();
   }
 
+  @action
   void updateTalk(ScheduledTalk talk) {
     _talksRepository.saveTalk(talk);
     talks = talks.map((t) => t.id == talk.id ? talk : t).toList();
-    notifyListeners();
   }
 
+  @action
   void updateFilter(Filter filter) {
     activeFilter = filter;
-    notifyListeners();
   }
 
+  @action
   void updateTab(int index) {
     activeTabIndex = index;
-    notifyListeners();
   }
 }

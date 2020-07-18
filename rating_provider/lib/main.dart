@@ -13,8 +13,8 @@ class RatingProviderApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(
-              builder: (context) =>
-                  RatingChangeNotifier(ConstSpeakersRepository(), ConstTalksRepository())),
+              create: (context) =>
+                  RatingAppState(ConstSpeakersRepository(), ConstTalksRepository())),
         ],
         child: MaterialApp(
           title: 'Mobius Speakers',

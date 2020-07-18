@@ -1,4 +1,4 @@
-name: rating_provider
+name: rating_mobx
 description: A new Flutter application.
 
 # The following defines the version and build number for your application.
@@ -17,8 +17,10 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  mobx: ^1.2.1+1
+  flutter_mobx: ^1.1.0+1
   provider: ^4.3.1
-  flutter_rating_bar: ^2.0.0+2
+  flutter_rating_bar: ^3.0.1+1
   flutter:
     sdk: flutter
 
@@ -27,6 +29,8 @@ dependencies:
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
+  mobx_codegen: ^1.0.1+1
+  build_runner: ^1.10.0
   flutter_test:
     sdk: flutter
 
