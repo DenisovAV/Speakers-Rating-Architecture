@@ -45,10 +45,12 @@ abstract class _RatingState with Store {
     _initTalks();
   }
 
+  @action
   void _initSpeakers() async {
     speakers = await _speakersRepository.loadSpeakers();
   }
 
+  @action
   void _initTalks() async {
     talks = await _talksRepository.loadTalks();
   }
