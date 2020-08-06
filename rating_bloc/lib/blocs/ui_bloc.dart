@@ -29,7 +29,6 @@ class UiBloc {
     _actionsController.stream.listen((action) {
       if (action is UpdateTabAction) {
         _currentState = _currentState.copyWith(activeTab: action.newTab);
-        print(_currentState);
         _stateController.add(_currentState);
       } else if (action is SpeakersAction) {
         speakersBloc.action.add(action);

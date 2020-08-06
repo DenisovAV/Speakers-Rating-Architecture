@@ -53,13 +53,11 @@ class ConstTalksRepository extends TalksRepository{
           topic: 'Как происходит рендеринг экрана сообщений ВКонтакте'),
       ScheduledTalk(11, '16:40', topic: 'Закрытие'),
     ]);
-    print(' xx ${_allTalks.length}');
     return _allTalks;
   }
 
   @override
   Future<List<ScheduledTalk>> getTalks() async {
-    print(_allTalks.length);
     return _allTalks.isNotEmpty ? _allTalks : await _initializeTalks();
   }
 
