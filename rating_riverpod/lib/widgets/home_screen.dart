@@ -16,7 +16,7 @@ class HomeScreen extends HookWidget {
     final filter = useProvider(filterProvider);
     final tab = useProvider(tabProvider);
     final isLoading = useProvider(loadingProvider);
-    if (!isLoading) {
+    if (isLoading) {
       return LoadingIndicator();
     } else {
       return Scaffold(
