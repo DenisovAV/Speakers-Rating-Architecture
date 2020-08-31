@@ -15,8 +15,8 @@ class HomeScreen extends HookWidget {
   Widget build(BuildContext context) {
     final filter = useProvider(filterProvider);
     final tab = useProvider(tabProvider);
-    final isLoading = useProvider(loadingProvider);
-    if (!isLoading) {
+    final isLoaded = useProvider(loadingProvider);
+    if (!isLoaded) {
       return LoadingIndicator();
     } else {
       return Scaffold(

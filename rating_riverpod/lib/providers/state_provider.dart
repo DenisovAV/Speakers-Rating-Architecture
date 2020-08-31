@@ -14,15 +14,12 @@ final filterProvider = StateProvider((_) => Filter.all);
 
 final tabProvider = StateProvider((_) => AppTab.speakers);
 
-final loadingProvider = Computed((watch) {
-  final speakers = watch(speakersProvider).state;
-  final talks = watch(talksProvider).state;
-  return speakers.isNotEmpty && talks.isNotEmpty;
-});
+final loadingProvider = Provider((ref) =>
+    ref.watch(speakersProvider.state).isNotEmpty && ref.watch(talksProvider.state).isNotEmpty);
 
-final filteredSpeakersProvider = Computed((watch) {
-  final filter = watch(filterProvider);
-  final speakers = watch(speakersProvider).state;
+final filteredSpeakersProvider = Provider((ref) {
+  final filter = ref.watch(filterProvider);
+  final speakers = ref.watch(speakersProvider.state);
 
   return speakers.where((s) {
     switch (filter.state) {
@@ -37,6 +34,4 @@ final filteredSpeakersProvider = Computed((watch) {
   }).toList();
 });
 
-final listedTalksProvider = Computed((watch) {
-  return watch(talksProvider).state;
-});
+final listedTalksProvider = Provider((ref) => ref.watch(talksProvider.state));

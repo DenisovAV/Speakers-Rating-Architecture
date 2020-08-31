@@ -13,7 +13,7 @@ class SpeakerList extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final speakers = useProvider(filteredSpeakersProvider);
-    final spekaersController = useProvider(speakersProvider);
+    final speakersController = useProvider(speakersProvider);
     return ListView.builder(
       itemCount: speakers.length,
       itemBuilder: (BuildContext context, int index) {
@@ -24,7 +24,7 @@ class SpeakerList extends HookWidget {
           onTap: () => Navigator.of(context).push(MaterialPageRoute(
             builder: (_) => DetailsScreen(
               speaker: speaker,
-              ratingChanged: (r) => spekaersController.updateSpeaker(speaker.copyWith(rating: r)),
+              ratingChanged: (r) => speakersController.updateSpeaker(speaker.copyWith(rating: r)),
             ),
           )),
         );

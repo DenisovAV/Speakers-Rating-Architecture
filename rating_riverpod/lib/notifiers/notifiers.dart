@@ -7,13 +7,12 @@ import 'package:state_notifier/state_notifier.dart';
 class SpeakersNotifier extends StateNotifier<List<Speaker>> {
   final SpeakersRepository _speakersRepository;
 
-  SpeakersNotifier(this._speakersRepository)
-      : super([]) {
+  SpeakersNotifier(this._speakersRepository) : super([]) {
     _init();
   }
 
   void _init() async {
-    state =  await _speakersRepository.loadSpeakers();
+    state = await _speakersRepository.loadSpeakers();
   }
 
   void updateSpeaker(Speaker speaker) {
@@ -25,8 +24,7 @@ class SpeakersNotifier extends StateNotifier<List<Speaker>> {
 class TalksNotifier extends StateNotifier<List<ScheduledTalk>> {
   final TalksRepository _talksRepository;
 
-  TalksNotifier(this._talksRepository)
-      : super([]) {
+  TalksNotifier(this._talksRepository) : super([]) {
     _init();
   }
 
