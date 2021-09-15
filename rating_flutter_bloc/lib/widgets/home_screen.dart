@@ -34,7 +34,7 @@ class HomeScreenState extends State<HomeScreen> {
               FilterButton(
                 visible: uiState.activeTab == AppTab.speakers,
                 activeFilter: uiState.filter,
-                onSelected: (filter) => context.bloc<UiBloc>().add(UpdateFilterAction(filter)),
+                onSelected: (filter) => context.read<UiBloc>().add(UpdateFilterAction(filter)),
               ),
             ],
           ),
@@ -46,7 +46,7 @@ class HomeScreenState extends State<HomeScreen> {
                   return SpeakerList(
                     speakers: _filteredSpeakers(speakersState.speakers, uiState.filter),
                     ratingChanged: (speaker, rating) => context
-                        .bloc<SpeakersBloc>()
+                        .read<SpeakersBloc>()
                         .add(UpdateSpeakerAction(speaker.copyWith(rating: rating))),
                   );
                 })
@@ -57,19 +57,19 @@ class HomeScreenState extends State<HomeScreen> {
                   return TalksList(
                     talks: talksState.talks,
                     onTalkTapped: (talk) => context
-                        .bloc<TalksBloc>()
+                        .read<TalksBloc>()
                         .add(UpdateTalkAction(talk.copyWith(isFavourite: !talk.isFavourite))),
                   );
                 }),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: AppTab.values.indexOf(uiState.activeTab),
-            onTap: (index) => context.bloc<UiBloc>().add(UpdateTabAction(AppTab.values[index])),
+            onTap: (index) => context.read<UiBloc>().add(UpdateTabAction(AppTab.values[index])),
             items: AppTab.values.map((tab) {
               return BottomNavigationBarItem(
                 icon: Icon(
                   tab == AppTab.speakers ? Icons.group : Icons.list,
                 ),
-                title: Text(tab == AppTab.speakers ? 'Speakers' : 'Schedule'),
+                label: tab == AppTab.speakers ? 'Speakers' : 'Schedule',
               );
             }).toList(),
           )));

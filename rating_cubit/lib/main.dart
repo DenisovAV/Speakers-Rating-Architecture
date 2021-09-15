@@ -13,7 +13,7 @@ class RatingCubitApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final speakersRepo = ConstSpeakersRepository();
-    final talksRepo = ConstTalksRepository(speakersRepo);
+    final talksRepo = ConstTalksRepository();
     return MultiBlocProvider(
       providers: [
         BlocProvider<SpeakersCubit>(

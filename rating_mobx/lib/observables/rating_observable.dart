@@ -21,7 +21,7 @@ abstract class _RatingState with Store {
   List<Speaker> speakers = [];
 
   @observable
-  Filter activeFilter;
+  Filter? activeFilter;
 
   @observable
   int activeTabIndex = AppTab.speakers.index;
@@ -46,12 +46,12 @@ abstract class _RatingState with Store {
   }
 
   @action
-  void _initSpeakers() async {
+  Future<void> _initSpeakers() async {
     speakers = await _speakersRepository.loadSpeakers();
   }
 
   @action
-  void _initTalks() async {
+  Future<void> _initTalks() async {
     talks = await _talksRepository.loadTalks();
   }
 

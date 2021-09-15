@@ -14,7 +14,7 @@ class TalksBloc extends Bloc<Action, TalksState>  {
   Stream<TalksState> mapEventToState(Action action) async* {
     if (action is LoadTalksAction) {
       try {
-        final list = await _talksRepository.getTalks();
+        final list = await _talksRepository.loadTalks();
         yield state.copyWith(talks: list, isLoading: false);
       } on Exception {
         yield state.copyWith(talks: [], isLoading: false);

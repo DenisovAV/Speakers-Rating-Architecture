@@ -1,8 +1,5 @@
 import 'package:rating_flutter_bloc/models/app_tab.dart';
-import 'package:rating_flutter_bloc/models/state/speakers_state.dart';
-import 'package:rating_flutter_bloc/models/state/talks_state.dart';
-
-import '../filter.dart';
+import 'package:rating_flutter_bloc/models/filter.dart';
 
 class AppState {
   final Filter filter;
@@ -14,8 +11,8 @@ class AppState {
   });
 
   AppState copyWith({
-    Filter filter,
-    AppTab activeTab,
+    Filter? filter,
+    AppTab? activeTab,
   }) {
     return AppState(
       activeTab: activeTab ?? this.activeTab,

@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:rating_mobx/models/app_tab.dart';
+import 'package:rating_mobx/models/filter.dart';
 import 'package:rating_mobx/observables/rating_observable.dart';
 import 'package:rating_mobx/widgets/filter_button.dart';
 import 'package:rating_mobx/widgets/loading_indicator.dart';
@@ -22,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           Observer(
               builder: (context) => FilterButton(
                     visible: state.activeTabIndex == AppTab.speakers.index,
-                    activeFilter: state.activeFilter,
+                    activeFilter: state.activeFilter ?? Filter.all,
                     onSelected: state.updateFilter,
                   )),
         ],

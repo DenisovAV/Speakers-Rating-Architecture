@@ -10,7 +10,7 @@ class TalksCubit extends Cubit<TalksState> {
 
   void loadTalks() async {
     try {
-      final list = await _talksRepository.getTalks();
+      final list = await _talksRepository.loadTalks();
       emit(state.copyWith(talks: list, isLoading: false));
     } on Exception {
       emit(state.copyWith(talks: [], isLoading: false));

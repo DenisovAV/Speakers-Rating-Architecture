@@ -1,16 +1,16 @@
-import 'package:rating_cubit/models/speaker.dart';
-import 'package:rating_cubit/widgets/speaker_item.dart';
-import 'package:rating_cubit/widgets/speaker_details.dart';
 import 'package:flutter/material.dart';
+import 'package:rating_cubit/models/speaker.dart';
+import 'package:rating_cubit/widgets/speaker_details.dart';
+import 'package:rating_cubit/widgets/speaker_item.dart';
 
 class SpeakerList extends StatelessWidget {
   final List<Speaker> speakers;
   final Function(Speaker, int) ratingChanged;
 
   SpeakerList({
-    Key key,
-    @required this.speakers,
-    @required this.ratingChanged,
+    required this.speakers,
+    required this.ratingChanged,
+    Key? key,
   }) : super(key: key);
 
   @override
