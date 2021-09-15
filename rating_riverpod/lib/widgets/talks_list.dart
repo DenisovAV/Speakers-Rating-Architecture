@@ -5,12 +5,14 @@ import 'package:rating_riverpod/widgets/talk_item.dart';
 import 'package:flutter/material.dart';
 
 class TalksList extends HookWidget {
-  TalksList({Key key}) : super(key: key);
+  TalksList({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final talks = useProvider(listedTalksProvider);
-    final talksController = useProvider(talksProvider);
+    final talksController = useProvider(talksProvider.notifier);
     return ListView.builder(
       itemCount: talks.length,
       itemBuilder: (BuildContext context, int index) {

@@ -5,15 +5,15 @@ import 'package:rating_riverpod/widgets/speaker_item.dart';
 import 'package:rating_riverpod/widgets/speaker_details.dart';
 import 'package:flutter/material.dart';
 
-class SpeakerList extends HookWidget {
+class SpeakerList extends ConsumerWidget {
   SpeakerList({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final speakers = useProvider(filteredSpeakersProvider);
-    final speakersController = useProvider(speakersProvider);
+  Widget build(BuildContext context, ScopedReader watch) {
+    final speakers = watch(filteredSpeakersProvider);
+    final speakersController = watch(speakersProvider.notifier);
     return ListView.builder(
       itemCount: speakers.length,
       itemBuilder: (BuildContext context, int index) {

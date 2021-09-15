@@ -7,7 +7,10 @@ import 'package:redux/redux.dart';
 class ActiveTab extends StatelessWidget {
   final ViewModelBuilder<AppTab> builder;
 
-  ActiveTab({Key key, @required this.builder}) : super(key: key);
+  ActiveTab({
+    required this.builder,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

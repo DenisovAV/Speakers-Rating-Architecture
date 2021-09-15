@@ -15,7 +15,7 @@ class SpeakersLoadedAction {
 }
 
 class UpdateSpeakerAction {
-  final int id;
+  final String id;
   final Speaker updatedSpeaker;
 
   UpdateSpeakerAction(this.id, this.updatedSpeaker);
@@ -32,7 +32,7 @@ class TalksLoadedAction {
 }
 
 class UpdateTalkAction {
-  final int id;
+  final String id;
   final ScheduledTalk updatedTalk;
 
   UpdateTalkAction(this.id, this.updatedTalk);

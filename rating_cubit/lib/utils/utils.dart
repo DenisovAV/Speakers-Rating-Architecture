@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Utils {
-  static Icon getRatingIcon(int rating) {
+  static Icon? getRatingIcon(int rating) {
     switch (rating) {
       case 1:
         return Icon(

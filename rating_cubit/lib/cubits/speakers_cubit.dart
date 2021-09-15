@@ -10,7 +10,7 @@ class SpeakersCubit extends Cubit<SpeakersState> {
 
   void loadSpeakers() async {
     try {
-      final list = await _speakersRepository.getSpeakers();
+      final list = await _speakersRepository.loadSpeakers();
       emit(state.copyWith(speakers: list, isLoading: false));
     } on Exception {
       emit(state.copyWith(speakers: [], isLoading: false));

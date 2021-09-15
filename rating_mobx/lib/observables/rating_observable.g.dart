@@ -9,13 +9,13 @@ part of 'rating_observable.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$RatingState on _RatingState, Store {
-  Computed<bool> _$isLoadedComputed;
+  Computed<bool>? _$isLoadedComputed;
 
   @override
   bool get isLoaded => (_$isLoadedComputed ??=
           Computed<bool>(() => super.isLoaded, name: '_RatingState.isLoaded'))
       .value;
-  Computed<List<Speaker>> _$filteredSpeakersComputed;
+  Computed<List<Speaker>>? _$filteredSpeakersComputed;
 
   @override
   List<Speaker> get filteredSpeakers => (_$filteredSpeakersComputed ??=
@@ -56,13 +56,13 @@ mixin _$RatingState on _RatingState, Store {
   final _$activeFilterAtom = Atom(name: '_RatingState.activeFilter');
 
   @override
-  Filter get activeFilter {
+  Filter? get activeFilter {
     _$activeFilterAtom.reportRead();
     return super.activeFilter;
   }
 
   @override
-  set activeFilter(Filter value) {
+  set activeFilter(Filter? value) {
     _$activeFilterAtom.reportWrite(value, super.activeFilter, () {
       super.activeFilter = value;
     });
@@ -81,6 +81,20 @@ mixin _$RatingState on _RatingState, Store {
     _$activeTabIndexAtom.reportWrite(value, super.activeTabIndex, () {
       super.activeTabIndex = value;
     });
+  }
+
+  final _$_initSpeakersAsyncAction = AsyncAction('_RatingState._initSpeakers');
+
+  @override
+  Future<void> _initSpeakers() {
+    return _$_initSpeakersAsyncAction.run(() => super._initSpeakers());
+  }
+
+  final _$_initTalksAsyncAction = AsyncAction('_RatingState._initTalks');
+
+  @override
+  Future<void> _initTalks() {
+    return _$_initTalksAsyncAction.run(() => super._initTalks());
   }
 
   final _$_RatingStateActionController = ActionController(name: '_RatingState');

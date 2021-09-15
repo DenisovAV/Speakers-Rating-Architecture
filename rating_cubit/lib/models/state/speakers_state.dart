@@ -1,4 +1,3 @@
-import 'package:rating_cubit/models/filter.dart';
 import 'package:rating_cubit/models/speaker.dart';
 
 class SpeakersState {
@@ -11,8 +10,8 @@ class SpeakersState {
   });
 
   SpeakersState copyWith({
-    List<Speaker> speakers,
-    bool isLoading,
+    List<Speaker>? speakers,
+    bool? isLoading,
   }) {
     return SpeakersState(
       speakers: speakers ?? this.speakers,

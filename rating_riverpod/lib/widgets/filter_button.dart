@@ -1,18 +1,20 @@
-import 'package:rating_riverpod/models/filter.dart';
 import 'package:flutter/material.dart';
+import 'package:rating_riverpod/models/filter.dart';
 
 class FilterButton extends StatelessWidget {
   final PopupMenuItemSelected<Filter> onSelected;
   final Filter activeFilter;
   final bool visible;
 
-  FilterButton({this.onSelected, this.activeFilter, this.visible, Key key}) : super(key: key);
+  FilterButton(
+      {required this.onSelected, required this.activeFilter, required this.visible, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final defaultStyle = Theme.of(context).textTheme.body1;
+    final defaultStyle = Theme.of(context).textTheme.bodyText1;
     final activeStyle =
-        Theme.of(context).textTheme.body1.copyWith(color: Theme.of(context).accentColor);
+    Theme.of(context).textTheme.bodyText1?.copyWith(color: Theme.of(context).indicatorColor);
     final button = _Button(
       onSelected: onSelected,
       activeFilter: activeFilter,
@@ -29,18 +31,18 @@ class FilterButton extends StatelessWidget {
 }
 
 class _Button extends StatelessWidget {
-  const _Button({
-    Key key,
-    @required this.onSelected,
-    @required this.activeFilter,
-    @required this.activeStyle,
-    @required this.defaultStyle,
-  }) : super(key: key);
-
   final PopupMenuItemSelected<Filter> onSelected;
   final Filter activeFilter;
-  final TextStyle activeStyle;
-  final TextStyle defaultStyle;
+  final TextStyle? activeStyle;
+  final TextStyle? defaultStyle;
+
+  const _Button({
+    required this.onSelected,
+    required this.activeFilter,
+    this.activeStyle,
+    this.defaultStyle,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

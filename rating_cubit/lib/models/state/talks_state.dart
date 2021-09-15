@@ -10,8 +10,8 @@ class TalksState {
   });
 
   TalksState copyWith({
-    List<ScheduledTalk> talks,
-    bool isLoading,
+    List<ScheduledTalk>? talks,
+    bool? isLoading,
   }) {
     return TalksState(
       talks: talks ?? this.talks,

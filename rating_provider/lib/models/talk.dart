@@ -2,17 +2,24 @@ import 'package:meta/meta.dart';
 
 @immutable
 class ScheduledTalk {
-  final int id;
+  final String id;
   final String time;
   final String speaker;
   final String topic;
   final bool isFavourite;
 
-  const ScheduledTalk(this.id, this.time, {this.speaker, this.topic, this.isFavourite = false});
+  const ScheduledTalk(
+      {required this.id,
+      required this.time,
+      required this.speaker,
+      required this.topic,
+      this.isFavourite = false});
 
   ScheduledTalk copyWith(
-      {String id, DateTime time, String speaker, String topic, bool isFavourite}) {
-    return ScheduledTalk(id ?? this.id, time ?? this.time,
+      {String? id, DateTime? time, String? speaker, String? topic, bool? isFavourite}) {
+    return ScheduledTalk(
+        id: id ?? this.id,
+        time: time?.toString() ?? this.time,
         speaker: speaker ?? this.speaker,
         topic: topic ?? this.topic,
         isFavourite: isFavourite ?? this.isFavourite);

@@ -9,7 +9,10 @@ import 'package:redux/redux.dart';
 class FilterSelector extends StatelessWidget {
   final bool visible;
 
-  FilterSelector({Key key, @required this.visible}) : super(key: key);
+  FilterSelector({
+    required this.visible,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => StoreConnector<AppState, _ViewModel>(
@@ -30,8 +33,8 @@ class _ViewModel {
   final Filter activeFilter;
 
   _ViewModel({
-    @required this.onFilterSelected,
-    @required this.activeFilter,
+    required this.onFilterSelected,
+    required this.activeFilter,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

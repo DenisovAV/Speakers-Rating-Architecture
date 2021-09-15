@@ -7,9 +7,12 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 class SpeakerDetails extends StatelessWidget {
-  final int id;
+  final String id;
 
-  SpeakerDetails({Key key, @required this.id}) : super(key: key);
+  SpeakerDetails({
+    required this.id,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => StoreConnector<AppState, _ViewModel>(
@@ -31,11 +34,11 @@ class _ViewModel {
   final Function(int) ratingChanged;
 
   _ViewModel({
-    @required this.speaker,
-    @required this.ratingChanged,
+    required this.speaker,
+    required this.ratingChanged,
   });
 
-  factory _ViewModel.from(Store<AppState> store, int id) {
+  factory _ViewModel.from(Store<AppState> store, String id) {
     final speaker = store.state.speakers.firstWhere((s) => s.id == id);
 
     return _ViewModel(

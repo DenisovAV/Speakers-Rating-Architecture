@@ -33,7 +33,7 @@ class HomeScreenState extends State<HomeScreen> {
               FilterButton(
                 visible: uiState.activeTab == AppTab.speakers,
                 activeFilter: uiState.filter,
-                onSelected: (filter) => context.bloc<UiCubit>().updateFilter(filter),
+                onSelected: (filter) => context.read<UiCubit>().updateFilter(filter),
               ),
             ],
           ),
@@ -45,7 +45,7 @@ class HomeScreenState extends State<HomeScreen> {
                   return SpeakerList(
                     speakers: _filteredSpeakers(speakersState.speakers, uiState.filter),
                     ratingChanged: (speaker, rating) => context
-                        .bloc<SpeakersCubit>()
+                        .read<SpeakersCubit>()
                         .updateSpeaker(speaker.copyWith(rating: rating)),
                   );
                 })
@@ -56,19 +56,19 @@ class HomeScreenState extends State<HomeScreen> {
                   return TalksList(
                     talks: talksState.talks,
                     onTalkTapped: (talk) => context
-                        .bloc<TalksCubit>()
+                        .read<TalksCubit>()
                         .updateTalk(talk.copyWith(isFavourite: !talk.isFavourite)),
                   );
                 }),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: AppTab.values.indexOf(uiState.activeTab),
-            onTap: (index) => context.bloc<UiCubit>().updateTab(AppTab.values[index]),
+            onTap: (index) => context.read<UiCubit>().updateTab(AppTab.values[index]),
             items: AppTab.values.map((tab) {
               return BottomNavigationBarItem(
                 icon: Icon(
                   tab == AppTab.speakers ? Icons.group : Icons.list,
                 ),
-                title: Text(tab == AppTab.speakers ? 'Speakers' : 'Schedule'),
+                label: tab == AppTab.speakers ? 'Speakers' : 'Schedule',
               );
             }).toList(),
           )));

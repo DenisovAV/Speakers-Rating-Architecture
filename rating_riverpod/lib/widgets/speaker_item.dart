@@ -1,14 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:rating_riverpod/models/speaker.dart';
 import 'package:rating_riverpod/utils/utils.dart';
-import 'package:flutter/material.dart';
 
 class SpeakerItem extends StatelessWidget {
   final GestureTapCallback onTap;
   final Speaker speaker;
 
   SpeakerItem({
-    @required this.onTap,
-    @required this.speaker,
+    required this.onTap,
+    required this.speaker,
   });
 
   @override
@@ -18,14 +18,14 @@ class SpeakerItem extends StatelessWidget {
       leading: CircleAvatar(
         backgroundImage: AssetImage(speaker.assetName),
       ),
-      trailing: _getIconWidget(speaker.rating),
+      trailing: _getIconWidget(speaker.rating ?? 0),
       title: Hero(
         tag: '_tag${speaker.id}_',
         child: Container(
           width: MediaQuery.of(context).size.width,
           child: Text(
             speaker.name,
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
         ),
       ),
@@ -33,19 +33,18 @@ class SpeakerItem extends StatelessWidget {
         speaker.topic,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
-        style: Theme.of(context).textTheme.subhead,
+        style: Theme.of(context).textTheme.bodyText2,
       ),
     );
   }
 
   Widget _getIconWidget(int rating) {
-    return (rating != null)
+    final icon = Utils.getRatingIcon(rating);
+    return icon != null
         ? IconButton(
-            icon: Utils.getRatingIcon(rating),
+            icon: icon,
             onPressed: () {},
           )
-        : Container(
-            width: 0,
-          );
+        : SizedBox.shrink();
   }
 }

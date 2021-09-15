@@ -2,12 +2,12 @@ import 'package:rating_provider/models/talk.dart';
 import 'package:flutter/material.dart';
 
 class TalkItem extends StatelessWidget {
-  final Function onTalkTapped;
+  final VoidCallback onTalkTapped;
   final ScheduledTalk talk;
 
   TalkItem({
-    @required this.onTalkTapped,
-    @required this.talk,
+    required this.onTalkTapped,
+    required this.talk,
   });
 
   @override
@@ -15,7 +15,7 @@ class TalkItem extends StatelessWidget {
     return ListTile(
       leading: Text(
         talk.time,
-        style: Theme.of(context).textTheme.body1,
+        style: Theme.of(context).textTheme.bodyText1,
       ),
       trailing: IconButton(
         icon: Icon(talk.isFavourite ? Icons.check_circle : Icons.check_circle_outline),
@@ -29,13 +29,13 @@ class TalkItem extends StatelessWidget {
             talk.topic,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
         ),
       ),
       subtitle: Text(
         talk.speaker,
-        style: Theme.of(context).textTheme.subhead,
+        style: Theme.of(context).textTheme.bodyText2,
       ),
     );
   }

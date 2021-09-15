@@ -9,7 +9,10 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatefulWidget {
   final void Function() onInit;
 
-  HomeScreen({@required this.onInit});
+  HomeScreen({
+    required this.onInit,
+    Key? key,
+  });
 
   @override
   HomeScreenState createState() {

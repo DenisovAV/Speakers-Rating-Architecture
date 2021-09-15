@@ -11,7 +11,7 @@ class RatingAppState with ChangeNotifier {
   final TalksRepository _talksRepository;
   List<ScheduledTalk> talks = [];
   List<Speaker> speakers = [];
-  Filter activeFilter;
+  Filter? activeFilter;
   int activeTabIndex = AppTab.speakers.index;
 
   bool get isLoaded => talks.isNotEmpty && speakers.isNotEmpty;

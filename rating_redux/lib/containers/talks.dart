@@ -7,7 +7,9 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 class Talks extends StatelessWidget {
-  Talks({Key key}) : super(key: key);
+  Talks({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class Talks extends StatelessWidget {
       builder: (context, vm) {
         return TalksList(
           talks: vm.talks,
-          onCheckboxChanged: vm.onCheckboxChanged,
+          onTalkTapped: vm.onCheckboxChanged,
         );
       },
     );
@@ -29,21 +31,19 @@ class _ViewModel {
   final bool loading;
 
   _ViewModel({
-    @required this.talks,
-    @required this.loading,
-    @required this.onCheckboxChanged
+    required this.talks,
+    required this.loading,
+    required this.onCheckboxChanged,
   });
 
   static _ViewModel fromStore(Store<AppState> store) => _ViewModel(
-      talks: store.state.talks,
-      loading: store.state.isLoading,
-      onCheckboxChanged: (talk) {
-        store.dispatch(UpdateTalkAction(
-          talk.id,
-          talk.copyWith(isFavourite: !talk.isFavourite),
-        ));
-      },
-
-    );
-  }
-
+        talks: store.state.talks,
+        loading: store.state.isLoading,
+        onCheckboxChanged: (talk) {
+          store.dispatch(UpdateTalkAction(
+            talk.id,
+            talk.copyWith(isFavourite: !talk.isFavourite),
+          ));
+        },
+      );
+}

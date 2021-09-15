@@ -6,7 +6,9 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 class TabSelector extends StatelessWidget {
-  TabSelector({Key key}) : super(key: key);
+  TabSelector({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class TabSelector extends StatelessWidget {
               icon: Icon(
                 tab == AppTab.speakers ? Icons.group : Icons.list,
               ),
-              title: Text(tab == AppTab.speakers ? 'Speakers' : 'Schedule'),
+              label: tab == AppTab.speakers ? 'Speakers' : 'Schedule',
             );
           }).toList(),
         );
@@ -36,8 +38,8 @@ class _ViewModel {
   final Function(int) onTabSelected;
 
   _ViewModel({
-    @required this.activeTab,
-    @required this.onTabSelected,
+    required this.activeTab,
+    required this.onTabSelected,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

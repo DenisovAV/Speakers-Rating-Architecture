@@ -7,7 +7,9 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 class FilteredSpeakers extends StatelessWidget {
-  FilteredSpeakers({Key key}) : super(key: key);
+  FilteredSpeakers({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,8 @@ class _ViewModel {
   final bool loading;
 
   _ViewModel({
-    @required this.speakers,
-    @required this.loading,
+    required this.speakers,
+    required this.loading,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

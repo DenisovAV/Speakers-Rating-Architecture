@@ -14,7 +14,7 @@ class SpeakersBloc extends Bloc<Action, SpeakersState> {
   Stream<SpeakersState> mapEventToState(Action action) async* {
     if (action is LoadSpeakersAction) {
       try {
-        final list = await _speakersRepository.getSpeakers();
+        final list = await _speakersRepository.loadSpeakers();
         yield state.copyWith(speakers: list, isLoading: false);
       } on Exception {
         yield state.copyWith(speakers: [], isLoading: false);

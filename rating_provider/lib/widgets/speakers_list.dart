@@ -8,9 +8,9 @@ class SpeakerList extends StatelessWidget {
   final Function(Speaker, int) ratingChanged;
 
   SpeakerList({
-    Key key,
-    @required this.speakers,
-    @required this.ratingChanged,
+    required this.speakers,
+    required this.ratingChanged,
+    Key? key,
   }) : super(key: key);
 
   @override

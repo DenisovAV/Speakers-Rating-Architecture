@@ -12,21 +12,21 @@ class AppState {
   final AppTab activeTab;
   final Filter filter;
 
-  AppState(
+  const AppState(
       {this.isLoading = false,
       this.speakers = const [],
       this.talks = const [],
       this.activeTab = AppTab.speakers,
       this.filter = Filter.all});
 
-  factory AppState.loading() => AppState(isLoading: true);
+  factory AppState.loading() => const AppState(isLoading: true);
 
   AppState copyWith({
-    bool isLoading,
-    List<Speaker> speakers,
-    List<ScheduledTalk> talks,
-    AppTab activeTab,
-    Filter filter,
+    bool? isLoading,
+    List<Speaker>? speakers,
+    List<ScheduledTalk>? talks,
+    AppTab? activeTab,
+    Filter? filter,
   }) {
     return AppState(
       isLoading: isLoading ?? this.isLoading,

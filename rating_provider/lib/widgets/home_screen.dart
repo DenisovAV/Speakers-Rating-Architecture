@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:rating_provider/models/app_tab.dart';
+import 'package:rating_provider/models/filter.dart';
 import 'package:rating_provider/notifiers/rating_change_notifier.dart';
 import 'package:rating_provider/widgets/filter_button.dart';
 import 'package:rating_provider/widgets/loading_indicator.dart';
@@ -22,7 +23,7 @@ class HomeScreen extends StatelessWidget {
             actions: [
               FilterButton(
                 visible: state.activeTabIndex == AppTab.speakers.index,
-                activeFilter: state.activeFilter,
+                activeFilter: state.activeFilter ?? Filter.all,
                 onSelected: state.updateFilter,
               ),
             ],
@@ -45,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                 icon: Icon(
                   tab == AppTab.speakers ? Icons.group : Icons.list,
                 ),
-                title: Text(tab == AppTab.speakers ? 'Speakers' : 'Schedule'),
+                label: tab == AppTab.speakers ? 'Speakers' : 'Schedule',
               );
             }).toList(),
           ),
