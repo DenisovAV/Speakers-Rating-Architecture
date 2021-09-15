@@ -1,17 +1,25 @@
-import 'package:rating_bloc/models/speaker.dart';
+import 'package:meta/meta.dart';
 
+@immutable
 class ScheduledTalk {
-  final int id;
+  final String id;
   final String time;
-  final Speaker speaker;
+  final String speaker;
   final String topic;
   final bool isFavourite;
 
-  const ScheduledTalk(this.id, this.time, {this.speaker, this.topic, this.isFavourite = false});
+  const ScheduledTalk(
+      {required this.id,
+        required this.time,
+        required this.speaker,
+        required this.topic,
+        this.isFavourite = false});
 
   ScheduledTalk copyWith(
-      {String id, DateTime time, String speaker, String topic, bool isFavourite}) {
-    return ScheduledTalk(id ?? this.id, time ?? this.time,
+      {String? id, DateTime? time, String? speaker, String? topic, bool? isFavourite}) {
+    return ScheduledTalk(
+        id: id ?? this.id,
+        time: time?.toString() ?? this.time,
         speaker: speaker ?? this.speaker,
         topic: topic ?? this.topic,
         isFavourite: isFavourite ?? this.isFavourite);
@@ -20,12 +28,12 @@ class ScheduledTalk {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ScheduledTalk &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          time == other.time &&
-          speaker == other.speaker &&
-          topic == other.topic;
+          other is ScheduledTalk &&
+              runtimeType == other.runtimeType &&
+              id == other.id &&
+              time == other.time &&
+              speaker == other.speaker &&
+              topic == other.topic;
 
   @override
   int get hashCode => id.hashCode ^ time.hashCode ^ speaker.hashCode ^ topic.hashCode;

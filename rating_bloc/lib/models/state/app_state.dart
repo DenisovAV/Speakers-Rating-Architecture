@@ -13,9 +13,9 @@ class AppState {
       this.activeTab = AppTab.speakers});
 
   AppState copyWith({
-    SpeakersState speakersState,
-    TalksState talksState,
-    AppTab activeTab,
+    SpeakersState? speakersState,
+    TalksState? talksState,
+    AppTab? activeTab,
   }) {
     return AppState(
       speakersState: speakersState ?? this.speakersState,

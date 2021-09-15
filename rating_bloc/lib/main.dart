@@ -12,7 +12,7 @@ class RatingBlocApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final speakersRepo = ConstSpeakersRepository();
-    final talksRepo = ConstTalksRepository(speakersRepo);
+    final talksRepo = ConstTalksRepository();
     final speakersBloc = SpeakersBloc(speakersRepo);
     final talksBloc = TalksBloc(talksRepo);
     return MaterialApp(

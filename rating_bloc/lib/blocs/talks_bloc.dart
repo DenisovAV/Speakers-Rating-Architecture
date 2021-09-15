@@ -27,7 +27,7 @@ class TalksBloc {
   void handleAction(Action action) async {
     if (action is LoadTalksAction) {
       try {
-        final list = await _talksRepository.getTalks();
+        final list = await _talksRepository.loadTalks();
         _currentState = _currentState.copyWith(talks: list);
       } on Exception {
         _currentState = _currentState.copyWith(talks: []);

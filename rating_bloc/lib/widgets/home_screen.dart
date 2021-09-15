@@ -22,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  UiBloc _bloc;
+  late final UiBloc _bloc;
 
   @override
   void initState() {
@@ -44,33 +44,33 @@ class HomeScreenState extends State<HomeScreen> {
                 title: Text('RatingBlocDemoApp'),
                 actions: [
                   FilterButton(
-                    visible: snapshot.data.activeTab == AppTab.speakers,
-                    activeFilter: snapshot.data.speakersState.filter,
+                    visible: snapshot.data?.activeTab == AppTab.speakers,
+                    activeFilter: snapshot.data?.speakersState.filter ?? Filter.all,
                     onSelected: (filter) => _bloc.action.add(UpdateFilterAction(filter)),
                   ),
                 ],
               ),
-              body: snapshot.data.activeTab == AppTab.speakers
+              body: snapshot.data?.activeTab == AppTab.speakers
                   ? SpeakerList(
-                      speakers: _filteredSpeakers(
-                          snapshot.data.speakersState.speakers, snapshot.data.speakersState.filter),
+                      speakers: _filteredSpeakers(snapshot.data?.speakersState.speakers ?? [],
+                          snapshot.data?.speakersState.filter ?? Filter.all),
                       ratingChanged: (speaker, rating) =>
                           _bloc.action.add(UpdateSpeakerAction(speaker.copyWith(rating: rating))),
                     )
                   : TalksList(
-                      talks: snapshot.data.talksState.talks,
+                      talks: snapshot.data?.talksState.talks ?? [],
                       onTalkTapped: (talk) => _bloc.action
                           .add(UpdateTalkAction(talk.copyWith(isFavourite: !talk.isFavourite))),
                     ),
               bottomNavigationBar: BottomNavigationBar(
-                currentIndex: AppTab.values.indexOf(snapshot.data.activeTab),
+                currentIndex: AppTab.values.indexOf(snapshot.data?.activeTab ?? AppTab.speakers),
                 onTap: (index) => _bloc.action.add(UpdateTabAction(AppTab.values[index])),
                 items: AppTab.values.map((tab) {
                   return BottomNavigationBarItem(
                     icon: Icon(
                       tab == AppTab.speakers ? Icons.group : Icons.list,
                     ),
-                    title: Text(tab == AppTab.speakers ? 'Speakers' : 'Schedule'),
+                    label: tab == AppTab.speakers ? 'Speakers' : 'Schedule',
                   );
                 }).toList(),
               ));
@@ -89,7 +89,7 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _bloc?.dispose();
+    _bloc.dispose();
     super.dispose();
   }
 }

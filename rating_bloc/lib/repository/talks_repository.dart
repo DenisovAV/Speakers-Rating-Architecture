@@ -1,79 +1,65 @@
 import 'package:rating_bloc/models/talk.dart';
-import 'package:rating_bloc/repository/speakers_repository.dart';
-import 'dart:async';
 
 abstract class TalksRepository {
+  const TalksRepository();
 
-  TalksRepository();
+  Future<List<ScheduledTalk>> loadTalks();
 
-  Future<List<ScheduledTalk>> getTalks();
-
-  Future<List<ScheduledTalk>> getTalksBySpeakerId({int speakerId});
-
-  Future<ScheduledTalk> getTalkById({int id});
-
-  void saveTalk(ScheduledTalk talks);
+  Future<void> saveTalk(ScheduledTalk talks);
 }
 
-class ConstTalksRepository extends TalksRepository{
-  final ConstSpeakersRepository _speakersRepository;
-  final _allTalks = <ScheduledTalk>[];
+class ConstTalksRepository extends TalksRepository {
+  const ConstTalksRepository();
 
-  ConstTalksRepository(this._speakersRepository);
+  static const _allTalks = <ScheduledTalk>[
+    ScheduledTalk(id: '0', time: '9:00', speaker: '', topic: 'Завтрак'),
+    ScheduledTalk(id: '1', time: '9:30', speaker: 'Йонатан Левин', topic: 'Неизвестно'),
+    ScheduledTalk(
+        id: '2',
+        time: '10:10',
+        speaker: 'Марина Плешкова',
+        topic: 'Лайфхаки в работе с техподдержкой Google Play Store и App Store Connect'),
+    ScheduledTalk(
+        id: '3',
+        time: '10:50',
+        speaker: 'Александр Денисов',
+        topic: 'Flutter State Management Wars. BLoC vs Redux'),
+    ScheduledTalk(
+        id: '4',
+        time: '11:30',
+        speaker: 'Барух Садогурский',
+        topic: 'Как правильно продать себя ради фана и профита'),
+    ScheduledTalk(
+        id: '5', time: '12:10', speaker: 'Giorgio Natili', topic: 'Mutation Testing at Scale'),
+    ScheduledTalk(id: '6', time: '13:00', speaker: '', topic: 'Обед'),
+    ScheduledTalk(
+        id: '7', time: '14:00', speaker: 'Светлана Смельчакова', topic: 'UI Automator deep diving'),
+    ScheduledTalk(
+        id: '8',
+        time: '14:40',
+        speaker: 'Виталий Фридман',
+        topic: 'How to win friends and influence people, on mobile'),
+    ScheduledTalk(
+        id: '9',
+        time: '15:20',
+        speaker: 'Борис Бенгус',
+        topic: 'Воспроизводимость End-to-end тестов, или «Ходим под себя»'),
+    ScheduledTalk(
+        id: '10',
+        time: '16:00',
+        speaker: 'Александр Сорокин',
+        topic: 'Как происходит рендеринг экрана сообщений ВКонтакте'),
+    ScheduledTalk(id: '11', time: '16:40', speaker: '', topic: 'Закрытие'),
+  ];
 
-  Future<List<ScheduledTalk>> _initializeTalks() async {
-    _allTalks.addAll([
-      ScheduledTalk(0, '9:00', topic: 'Завтрак'),
-      ScheduledTalk(1, '9:30',
-          speaker: await _speakersRepository.getSpeakerById(id: 0), topic: 'Неизвестно'),
-      ScheduledTalk(2, '10:10',
-          speaker: await _speakersRepository.getSpeakerById(id: 1),
-          topic: 'Лайфхаки в работе с техподдержкой Google Play Store и App Store Connect'),
-      ScheduledTalk(3, '10:50',
-          speaker: await _speakersRepository.getSpeakerById(id: 2),
-          topic: 'Flutter State Management Wars. BLoC vs Redux'),
-      ScheduledTalk(4, '11:30',
-          speaker: await _speakersRepository.getSpeakerById(id: 4),
-          topic: 'Как правильно продать себя ради фана и профита'),
-      ScheduledTalk(5, '12:10',
-          speaker: await _speakersRepository.getSpeakerById(id: 5),
-          topic: 'Mutation Testing at Scale'),
-      ScheduledTalk(6, '13:00', topic: 'Обед'),
-      ScheduledTalk(7, '14:00',
-          speaker: await _speakersRepository.getSpeakerById(id: 6),
-          topic: 'UI Automator deep diving'),
-      ScheduledTalk(8, '14:40',
-          speaker: await _speakersRepository.getSpeakerById(id: 6),
-          topic: 'How to win friends and influence people, on mobile'),
-      ScheduledTalk(9, '15:20',
-          speaker: await _speakersRepository.getSpeakerById(id: 7),
-          topic: 'Воспроизводимость End-to-end тестов, или «Ходим под себя»'),
-      ScheduledTalk(10, '16:00',
-          speaker: await _speakersRepository.getSpeakerById(id: 8),
-          topic: 'Как происходит рендеринг экрана сообщений ВКонтакте'),
-      ScheduledTalk(11, '16:40', topic: 'Закрытие'),
-    ]);
+  @override
+  Future<List<ScheduledTalk>> loadTalks() async {
     return _allTalks;
   }
 
   @override
-  Future<List<ScheduledTalk>> getTalks() async {
-    return _allTalks.isNotEmpty ? _allTalks : await _initializeTalks();
-  }
-
-  @override
-  Future<List<ScheduledTalk>> getTalksBySpeakerId({int speakerId}) async {
-    return _allTalks.where((talk) => talk.speaker.id == speakerId);
-  }
-
-  @override
-  Future<ScheduledTalk> getTalkById({int id}) async {
-    return _allTalks.firstWhere((talk) => talk.id == id);
-  }
-
-  @override
-  void saveTalk(ScheduledTalk talks) {
+  Future<void> saveTalk(ScheduledTalk talks) async {
     //Here should be saving item to repository
-    return null;
+    return;
   }
 }

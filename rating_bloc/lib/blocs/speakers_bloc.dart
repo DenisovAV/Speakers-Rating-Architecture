@@ -4,6 +4,7 @@ import 'package:rating_bloc/actions/actions.dart';
 import 'package:rating_bloc/models/state/speakers_state.dart';
 import 'package:rating_bloc/repository/speakers_repository.dart';
 
+
 class SpeakersBloc {
   final SpeakersRepository _speakersRepository;
 
@@ -16,7 +17,7 @@ class SpeakersBloc {
   Sink<Action> get action => _actionsController.sink;
 
   SpeakersBloc(this._speakersRepository) {
-    _actionsController.stream.listen(handleAction);
+    _actionsController.stream.listen(_handleAction);
   }
 
   void dispose() {
@@ -24,10 +25,10 @@ class SpeakersBloc {
     _actionsController.close();
   }
 
-  void handleAction(Action action) async {
+  void _handleAction(Action action) async {
     if (action is LoadSpeakersAction) {
       try {
-        final list = await _speakersRepository.getSpeakers();
+        final list = await _speakersRepository.loadSpeakers();
         _currentState = _currentState.copyWith(speakers: list);
       } on Exception {
         _currentState = _currentState.copyWith(speakers: []);

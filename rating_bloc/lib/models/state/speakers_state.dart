@@ -11,8 +11,8 @@ class SpeakersState {
   });
 
   SpeakersState copyWith({
-    List<Speaker> speakers,
-    Filter filter,
+    List<Speaker>? speakers,
+    Filter? filter,
   }) {
     return SpeakersState(
       speakers: speakers ?? this.speakers,
